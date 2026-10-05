@@ -5,12 +5,17 @@ from schemas import LeadCreate
 from database import engine, Base
 from sqlalchemy.orm import Session
 from ai_service import generate_followup
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://event-lead-manager-frontend.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
