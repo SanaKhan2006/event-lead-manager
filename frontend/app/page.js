@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function Home() {
   const [leads, setLeads] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -26,7 +28,7 @@ export default function Home() {
   // FETCH LEADS
 
   const fetchLeads = () => {
-    fetch("http://127.0.0.1:8000/leads")
+    fetch(`${API_URL}/leads`)
       .then((response) => response.json())
       .then((data) => setLeads(data));
   };
@@ -61,8 +63,8 @@ export default function Home() {
     e.preventDefault();
 
     const url = editingId
-      ? `http://127.0.0.1:8000/leads/${editingId}`
-      : "http://127.0.0.1:8000/leads";
+      ? `${API_URL}/leads/${editingId}`
+      : `${API_URL}/leads`;
 
     const response = await fetch(url, {
       method: editingId ? "PUT" : "POST",
@@ -108,7 +110,7 @@ export default function Home() {
     if (!confirmed) return;
 
     const response = await fetch(
-      `http://127.0.0.1:8000/leads/${id}`,
+      `${API_URL}/leads/${id}`,
       {
         method: "DELETE",
       }
@@ -128,7 +130,7 @@ export default function Home() {
     });
 
     const response = await fetch(
-      `http://127.0.0.1:8000/leads/search?${params.toString()}`
+      `${API_URL}/leads/search?${params.toString()}`
     );
 
     const data = await response.json();
@@ -153,7 +155,7 @@ export default function Home() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/ai/followup",
+        `${API_URL}/ai/followup`,
         {
           method: "POST",
           headers: {
