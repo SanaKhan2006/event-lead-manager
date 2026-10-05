@@ -1,0 +1,10 @@
+{
+  "name": "event-lead-manager",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd backend && venv\\Scripts\\python.exe -m uvicorn main:app --reload\" \"cd frontend && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
